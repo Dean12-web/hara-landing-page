@@ -8,11 +8,10 @@ export default function MainLayout(){
             <a className="skip" href="#main">
                 Lewati ke konten
             </a>
-            <Navbar>
+            <Navbar />
                 <main id="main" tabIndex={-1}>
                     <Outlet/>
                 </main>
-            </Navbar>
             <Footer />
         </>
     )

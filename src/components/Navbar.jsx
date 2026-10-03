@@ -10,10 +10,18 @@ export default function Navbar(){
         <header className="topbar">
                 <div className="wrap nav-row">
                     {/* Logo */}
-                    <Link to="/" className="logo" arial-label="Hara, beranda"
+                    <Link 
+                        to="/" 
+                        className="logo" 
+                        arial-label="Hara, beranda"
                         onClick={()=>setIsOpen(false)}
+                        style={{display:"flex", alignItems:"center"}}
                     >
-                        <img src={hara_logo} alt="hara_logo" width="12%" /><i></i>
+                        <img 
+                            src={hara_logo} 
+                            alt="HARA Creative Agency" 
+                            style={{height:"120px", width:"auto", objectFit:"contain"}}
+                        />
                     </Link>
 
                     {/* Nav */}

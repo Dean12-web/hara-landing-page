@@ -1,13 +1,22 @@
 import { Link } from "react-router-dom";
-import { logo_hara } from "../assets/images/logo_hara.png";
+import logo_hara from "../assets/images/hara_logo.png";
+
 export default function Footer(){
     return(
         <footer className="footer" id="footer">
             <div className="wrap">
                 <div className="footer-grid">
                     <div>
-                        <Link to="/">
-                            <img src={logo_hara} alt="hara_logo" width="12%" /><i></i>
+                        <Link to="/"
+                            className="logo"
+                            aria-label="Hara, beranda"
+                            style={{display:"inline-block", marginBottom:"16px"}}
+                        >
+                            <img 
+                                src={logo_hara} 
+                                alt="HARA Creative Agency" 
+                                style={{height:'150px', width:"auto", objectFit:"contain"}}
+                            />
                         </Link>
                         <p className="mt">
                             Creative &amp; Digital Studio based in Medan. We help brands build, create, and grow.

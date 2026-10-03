@@ -79,9 +79,9 @@ export default function Home(){
                                 <small className="muted">{plan.period}</small>
 
                                 <ul>
-                                    {plan.features.map((feat, idx)=>{
+                                    {plan.features.map((feat, idx)=>(
                                         <li key={idx}>{feat}</li>
-                                    })}
+                                    ))}
                                 </ul>
                                 <Link
                                     className={plan.featured ? 'btn blue': 'btn outline'}
