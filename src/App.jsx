@@ -7,7 +7,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
-// import ServiceDetail from "./pages/ServiceDetail";
+import ServiceDetail from "./pages/ServiceDetail";
 // import Portfolio from "./pages/Portfolio";
 // import PortfolioDetail from "./pages/PortfolioDetail";
 // import Pricing from "./pages/Pricing";
@@ -26,7 +26,7 @@ export default function App(){
 
             {/* Katalog & Detail Layanan */}
             <Route path="services" element={<Services/>}></Route>
-            {/* <Route path="services/:id" element={<ServiceDetail/>}></Route> */}
+            <Route path="services/:id" element={<ServiceDetail/>}></Route>
 
             {/* Katalog & Detail Portfolio */}
             {/* <Route path="portfolio" element={<Portfolio/>}></Route>
