@@ -1,5 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { servicesData } from "../data/haraData";
+import CtaBanner from "../components/CtaBanner";
+import Faq from "../components/Faq";
 
 export default function ServiceDetail(){
     const {id} = useParams();
@@ -10,51 +12,94 @@ export default function ServiceDetail(){
     }
 
     return (
-        <section className="section">
-            <div 
-                className="wrap"
-                style={{maxWidth:'800px'}}
-            >
-                <Link
-                    to="/services"
-                    className="link"
-                    style={{marginBottom:'1.5rem', display:'inline-block'}} 
-                >
-                    ← Kembali ke Semua Layanan
-                </Link>
-                <div className="eyebrow lime">{service.number} / Layanan</div>
-                <h1 style={{marginTop:'0.5rem'}}>{service.title}</h1>
-                <p className="lead">{service.detailIntro}</p>
-
-                <div 
-                    className="card"
-                    style={{marginTop:'2rem', padding:'2rem'}}
-                >
-                    <h3>Deliverables &amp; Lingkup Pekerjaan:</h3>
-                    <ul style={{marginTop:'1rem', lineHeight:'1.8'}}>
-                        {service.deliverables.map((item, idx) => (
-                            <li key={idx}>{item}</li>
-                        ))}
-                    </ul>
-                    <div style={{marginTop:'2rem', borderTop:'1px solid var(--border, #eee)', paddingTop:'1.5rem'}}>
-                        <div className="price">
-                            <small>Investasi mulai:</small> {' '}
-                            <strong style={{fontSize:'1.4rem'}}>{service.price}</strong>
-                            <small>{service.unit}</small>
-                        </div>
-                        <div className="flow mt">
-                            <Link
-                                className="btn blue"
-                                to={`/brief/?service=${service.id}`}
-                            >
-                                Mulai Project Ini ↗</Link>
-                        </div>
-
-                    </div>
-
+        <>
+        <section className="page-hero">
+            <div className="wrap">
+                <div className="crumb">
+                    <Link to="/">
+                        Beranda
+                    </Link> / <Link to="/services">Layanan</Link> / {" "}
+                    {service.short || service.title}
                 </div>
+                <div className="eyebrow lime">
+                    Service / {service.short || service.title}
+                </div>
+                <h1>{service.title}</h1>
+                <p className="lead">{service.desc}</p>
             </div>
         </section>
+        <section className="section">
+          <div className="wrap split">
+            <div className="detail-text">
+                <div className="eyebrow lime">The right starting point</div>
+                <h2>{service.desc}</h2>
+                <p>{service.text}</p>
+
+                <h3>Apa yang Anda dapatkan</h3>
+                <ul className="checklist">
+                    {service.deliverables &&
+                        service.deliverables.map((item,idx) => (
+                            <li key={idx}>{item}</li>
+                        ))}
+                </ul>
+                {service.steps && (
+                    <>
+                        <h3>Dari ide sampai siap digunakan</h3>
+                        <ol className="number-list" style={{listStyle:"none", padding: 0}}>
+                            {service.steps.map((step,idx) =>(
+                                <li key={idx}>{step}</li>
+                            ))}
+                        </ol>
+                    </>
+                )}
+
+                <h3>Yang perlu disiapkan</h3>
+                <p>{service.need}</p>
+                {service.exclude && (
+                    <div className="notice mt">{service.exclude}</div>
+                )}                        
+            </div>
+
+            <aside className="card sidebar">
+                <div className="eyebrow lime">Investment overview</div>
+                <h3>Mulai dari</h3>
+                <div className="display lime mt" style={{fontSize:"40px"}}>
+                    {service.price}
+                </div>
+                <p>{service.unit}</p>
+                <div className="summary-row mt">
+                    <span>Estimasi durasi</span>
+                    <strong>{service.time || "Sesuai kesepakatan"}</strong>
+                </div>
+                <div className="summary-row">
+                    <span>Modal kerja</span>
+                    <strong>Scope disepakati di awal</strong>
+                </div>
+
+                <Link
+                    className="btn mt"
+                    to={`/brief?service=${service.id}&plan=starter`}
+                >
+                    Mulai dengan layanan ini ↗
+                </Link>
+
+                <p className="mt" style={{fontSize:"12px"}}>
+                    Harga awal bukan tagihan. Kebutuhan dan biaya final dibahas sebelum project dimulai.
+                </p>
+
+                <Link
+                    className="link"
+                    style={{display:"inline-block", marginTop: "20px"}}
+                    to="/contact"
+                >
+                    Tanya dulu ↗
+                </Link>
+            </aside>
+          </div>
+        </section>
+        <Faq/>
+        <CtaBanner/>
+        </>
     )
 }
 
