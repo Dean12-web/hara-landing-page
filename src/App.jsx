@@ -10,7 +10,7 @@ import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 import Portfolio from "./pages/Portfolio";
 import PortfolioDetail from "./pages/PortfolioDetail";
-// import Pricing from "./pages/Pricing";
+import Pricing from "./pages/Pricing";
 // import Contact from "./pages/Contact";
 // import Brief from "./pages/Brief";
 import NotFound from "./pages/NotFound";
@@ -32,7 +32,7 @@ export default function App(){
             <Route path="portfolio" element={<Portfolio/>}></Route>
             <Route path="portfolio/:id" element={<PortfolioDetail/>}></Route>
 
-            {/* <Route path="pricing" element={<Pricing/>}></Route> */}
+            <Route path="pricing" element={<Pricing/>}></Route>
             {/* <Route path="contact" element={<Contact/>}></Route> */}
             {/* <Route path="brief" element={<Brief/>}></Route> */}
         
