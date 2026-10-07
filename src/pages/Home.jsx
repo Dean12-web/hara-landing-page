@@ -119,7 +119,7 @@ export default function Home(){
                                 to={`/portfolio/${item.id}`}
                             >
                                 <div
-                                    className={`work-at ${item.artClass}`}
+                                    className={`work-art ${item.artClass}`}
                                     role="img"
                                     aria-label={`Ilustarsi konsep ${item.title}`}
                                 >
