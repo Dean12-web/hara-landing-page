@@ -12,7 +12,7 @@ export default function NotFound(){
             >
                 <div className="eyebrow lime">404 Error</div>
                 <h1 style={{fontSize:'4rem', margin:'1rem 0'}}>Halaman Tidak Ditemukan</h1>
-                <p className="lead">Tautan yang Anda tuju mungkin salah ketik atau telah dipindahkan.</p>
+                <p>Tautan yang Anda tuju mungkin salah ketik atau telah dipindahkan.</p>
                 <div className="mt">
                     <Link to="/" className="btn blue">
                         Kembali ke Beranda↗

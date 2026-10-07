@@ -336,6 +336,10 @@ export const servicesData = [
 
 // Data FAQ umum layanan (bisa ditaruh di haraData.js)
 export const serviceFaqs = [
+ {
+    q: "Bagaimana cara memulai project?",
+    a: "Pilih layanan atau paket, isi brief, lalu periksa ringkasannya. Pada versi ini brief disimpan di perangkat Anda dan bisa diunduh untuk dibagikan melalui kontak whatsapp HARA.",
+  },
   {
     q: "Apakah harga yang tampil sudah final?",
     a: "Harga merupakan estimasi awal berdasarkan paket pada template. Scope tambahan, pajak bila berlaku, biaya pihak ketiga, dan jadwal akan dikonfirmasi melalui penawaran tertulis.",
@@ -352,4 +356,13 @@ export const serviceFaqs = [
     q: "Bagaimana revisi dikerjakan?",
     a: "Jumlah revisi mengikuti scope paket. Feedback dikumpulkan dalam satu putaran agar pengerjaan terarah. Perubahan scope dibahas sebelum dilanjutkan.",
   },
+  {
+    q: "Bisakah mengambil lebih dari satu layanan?",
+    a: "Bisa. Pilih layanan utama pada brief lalu tuliskan layanan tambahan pada deskripsi kebutuhan untuk penawaran custom.",
+  },
+  {
+    q: "Apakah bisa bekerja sama di luar Medan??",
+    a: "Diskusi dan review dapat dilakukan secara online. Kebutuhan produksi di lokasi perlu dibahas untuk menghitung jadwal, perjalanan, dan biaya tambahan.",
+  },
+
 ];
