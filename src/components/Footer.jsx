@@ -41,6 +41,7 @@ export default function Footer(){
                         <h3>Let's talk</h3>
                         <Link to="/brief">Mulai Project</Link>
                         <Link to="/contact">Contact</Link>
+                        <Link to="/faq">Faqs</Link>
                     </div>
 
                     <div>
