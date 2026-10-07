@@ -130,7 +130,7 @@ export default function Home(){
                                     </div>
                                     <div className="work-info">
                                        <div>
-                                            <span>{item.subtitle}</span>
+                                            <span style={{color:"white"}}>{item.subtitle}</span>
                                             <h3>{item.title}</h3>
                                         </div>
                                         <b className="arrow lime">↗</b>
