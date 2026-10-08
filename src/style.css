@@ -22,7 +22,7 @@ body {
     margin: 0;
     background: var(--ink);
     color: #fff;
-    font: 15px/1.65 Arial, Helvetica, sans-serif
+    font: 15px/1.65 'Plus Jakarta Sans', sans-serif;
 }
 
 a {

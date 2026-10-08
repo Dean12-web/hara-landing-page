@@ -366,3 +366,33 @@ export const serviceFaqs = [
   },
 
 ];
+
+export const initialDraft = {
+  service: "social-media-management",
+  plan:"starter",
+  budget: "",
+  timelie: "",
+  name: "",
+  company:"",
+  email:"",
+  phone:"",
+  description:"",
+  reference:"",
+  consent:false,
+};
+
+const budgetOptions = [
+  "Di bawah Rp.1.500.000",
+  "Rp1.500.000 - Rp3.000.000",
+  "Rp3.000.000 - RP5.000.000",
+  "Di atas Rp5.000.000",
+  "Perlu rekomendasi",
+];
+
+const timelineOptions = [
+  "Secepatnya",
+  "Dalam 2-4 minggu",
+  "1-2 bulan lagi",
+  "Masih eksplorasi",
+];
+
