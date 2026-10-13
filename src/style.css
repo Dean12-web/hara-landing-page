@@ -239,7 +239,7 @@ small {
 }
 
 .btn.outline:hover {
-    border-color: var(--lime)
+    border-color: var(--blue2)
 }
 
 .btn.dark {
