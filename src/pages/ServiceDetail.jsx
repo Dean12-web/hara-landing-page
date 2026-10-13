@@ -2,6 +2,8 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { servicesData } from "../data/haraData";
 import CtaBanner from "../components/CtaBanner";
 import Faq from "../components/Faq";
+import SEO from "../components/SEO";
+import { SITE_URL, getBreadcrumbSchema, getServiceSchema } from "../data/seoData";
 
 export default function ServiceDetail(){
     const {id} = useParams();
@@ -11,8 +13,21 @@ export default function ServiceDetail(){
         return <Navigate to="/services" replace/>;
     }
 
+    const breadcrumbs = getBreadcrumbSchema([
+        { name: "Beranda", url: "/" },
+        { name: "Layanan", url: "/services" },
+        { name: service.title, url: `/services/${service.id}` },
+    ]);
+    const serviceSchema = getServiceSchema(service);
+
     return (
         <>
+        <SEO
+            title={`${service.title} | Layanan HARA Creative Medan`}
+            description={`${service.desc} ${service.text}`}
+            canonical={`${SITE_URL}/services/${service.id}`}
+            schema={[breadcrumbs, serviceSchema]}
+        />
         <section className="page-hero">
             <div className="wrap">
                 <div className="crumb">
@@ -45,7 +60,7 @@ export default function ServiceDetail(){
                 {service.steps && (
                     <>
                         <h3>Dari ide sampai siap digunakan</h3>
-                        <ol className="number-list" style={{listStyle:"none", padding: 0}}>
+                        <ol className="number-list" style={{ listStyle: "none", padding: 0 }}>
                             {service.steps.map((step,idx) =>(
                                 <li key={idx}>{step}</li>
                             ))}

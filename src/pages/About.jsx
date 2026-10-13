@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import CtaBanner from "../components/CtaBanner";
+import SEO from "../components/SEO";
+import { PAGE_SEO, getBreadcrumbSchema } from "../data/seoData";
 
 const principles = [
   {
@@ -20,8 +22,19 @@ const principles = [
 ];
 
 export default function About() {
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "Beranda", url: "/" },
+    { name: "Tentang Kami", url: "/about" },
+  ]);
+
   return (
     <>
+      <SEO
+        title={PAGE_SEO.about.title}
+        description={PAGE_SEO.about.description}
+        canonical={PAGE_SEO.about.canonical}
+        schema={breadcrumbs}
+      />
       <section className="page-hero">
         <div className="wrap">
           <div className="crumb">

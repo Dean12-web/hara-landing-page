@@ -1,11 +1,24 @@
 import { Link } from "react-router-dom"
 import { serviceFaqs } from "../data/haraData"
 import CtaBanner from "../components/CtaBanner"
-
+import SEO from "../components/SEO"
+import { PAGE_SEO, getBreadcrumbSchema, getFaqSchema } from "../data/seoData"
 
 export default function Faq(){
+    const breadcrumbs = getBreadcrumbSchema([
+        { name: "Beranda", url: "/" },
+        { name: "FAQ", url: "/faq" },
+    ]);
+    const faqSchema = getFaqSchema(serviceFaqs);
+
     return (
         <>
+            <SEO
+                title={PAGE_SEO.faq.title}
+                description={PAGE_SEO.faq.description}
+                canonical={PAGE_SEO.faq.canonical}
+                schema={[breadcrumbs, faqSchema]}
+            />
             <section className="page-hero">
                 <div className="wrap">
                     <div className="crumb">

@@ -2,6 +2,8 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { portfolioData } from '../data/haraData';
 import CtaBanner from '../components/CtaBanner';
+import SEO from '../components/SEO';
+import { PAGE_SEO, getBreadcrumbSchema } from '../data/seoData';
 
 export default function Portfolio(){
     const [activeCategory, setActiveCategory] = useState('Semua');
@@ -49,8 +51,19 @@ export default function Portfolio(){
         portfolioRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
     
+    const breadcrumbs = getBreadcrumbSchema([
+        { name: "Beranda", url: "/" },
+        { name: "Portfolio", url: "/portfolio" },
+    ]);
+
     return (
     <>
+        <SEO
+            title={PAGE_SEO.portfolio.title}
+            description={PAGE_SEO.portfolio.description}
+            canonical={PAGE_SEO.portfolio.canonical}
+            schema={breadcrumbs}
+        />
         <section className="page-hero">
             <div className="wrap">
                 <div className="crumb">

@@ -1,6 +1,8 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { portfolioData } from "../data/haraData";
 import CtaBanner from "../components/CtaBanner";
+import SEO from "../components/SEO";
+import { SITE_URL, getBreadcrumbSchema, getPortfolioSchema } from "../data/seoData";
 
 export default function PortfolioDetail(){
     const {id} = useParams();
@@ -14,8 +16,21 @@ export default function PortfolioDetail(){
 
     const nextWork = portfolioData[(currentIndex + 1) % portfolioData.length];
 
+    const breadcrumbs = getBreadcrumbSchema([
+        { name: "Beranda", url: "/" },
+        { name: "Portfolio", url: "/portfolio" },
+        { name: work.title, url: `/portfolio/${work.id}` },
+    ]);
+    const portfolioSchema = getPortfolioSchema(work);
+
     return (
         <>
+            <SEO
+                title={`${work.title} - ${work.category} | Portofolio HARA Creative`}
+                description={`${work.desc} ${work.challenge || ''}`}
+                canonical={`${SITE_URL}/portfolio/${work.id}`}
+                schema={[breadcrumbs, portfolioSchema]}
+            />
             <div className="page-hero">
                 <div className="wrap">
                     <div className="crumb">

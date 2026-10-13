@@ -1,10 +1,23 @@
 import { Link } from "react-router-dom";
 import { pricingPlans, servicesData } from "../data/haraData";
 import CtaBanner from "../components/CtaBanner";
+import SEO from "../components/SEO";
+import { PAGE_SEO, getBreadcrumbSchema } from "../data/seoData";
 
 export default function Pricing(){
+    const breadcrumbs = getBreadcrumbSchema([
+        { name: "Beranda", url: "/" },
+        { name: "Pricing", url: "/pricing" },
+    ]);
+
     return(
         <>
+            <SEO
+                title={PAGE_SEO.pricing.title}
+                description={PAGE_SEO.pricing.description}
+                canonical={PAGE_SEO.pricing.canonical}
+                schema={breadcrumbs}
+            />
             <section className="page-hero">
                 <div className="wrap">
                     <div className="crumb">

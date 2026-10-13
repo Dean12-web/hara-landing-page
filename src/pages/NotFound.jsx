@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
+import { PAGE_SEO } from "../data/seoData";
 
 export default function NotFound(){
     return(
-        <section 
+        <>
+            <SEO
+                title={PAGE_SEO.notFound.title}
+                description={PAGE_SEO.notFound.description}
+                noindex={true}
+            />
+            <section 
             className="section"
             style={{minHeight:'60vh', display: 'flex', alignItems: 'center'}}
         >
@@ -21,5 +29,6 @@ export default function NotFound(){
 
             </div>
         </section>
+        </>
     )
 }

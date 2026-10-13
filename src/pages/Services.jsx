@@ -1,12 +1,24 @@
 import { Link } from "react-router-dom";
 import { servicesData } from "../data/haraData";
 import CtaBanner from "../components/CtaBanner";
-
+import SEO from "../components/SEO";
+import { PAGE_SEO, getBreadcrumbSchema } from "../data/seoData";
 
 export default function Services(){
+    const breadcrumbs = getBreadcrumbSchema([
+        { name: "Beranda", url: "/" },
+        { name: "Layanan", url: "/services" },
+    ]);
+
     return(
         <>
-       <section className="page-hero">
+        <SEO
+            title={PAGE_SEO.services.title}
+            description={PAGE_SEO.services.description}
+            canonical={PAGE_SEO.services.canonical}
+            schema={breadcrumbs}
+        />
+        <section className="page-hero">
             <div className="wrap">
                 <div className="crumb">
                     <Link to="/">Beranda</Link> / Layanan kami

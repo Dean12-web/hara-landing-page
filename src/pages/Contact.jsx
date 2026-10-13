@@ -1,9 +1,22 @@
 import { Link } from "react-router-dom";
 import CtaBanner from "../components/CtaBanner";
+import SEO from "../components/SEO";
+import { PAGE_SEO, getBreadcrumbSchema, getOrganizationSchema } from "../data/seoData";
 
 export default function Contact(){
+    const breadcrumbs = getBreadcrumbSchema([
+        { name: "Beranda", url: "/" },
+        { name: "Kontak", url: "/contact" },
+    ]);
+
     return(
         <>
+            <SEO
+                title={PAGE_SEO.contact.title}
+                description={PAGE_SEO.contact.description}
+                canonical={PAGE_SEO.contact.canonical}
+                schema={[breadcrumbs, getOrganizationSchema()]}
+            />
             <div className="page-hero">
                 <div className="wrap">
                     <div className="crumb">

@@ -10,7 +10,7 @@ export default function Hero(){
                         Creative<span>Agency.</span>
                     </h1>
                     <p className="lead">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit aliquam iusto similique deserunt aliquid saepe voluptatem quasi cumque ut delectus!
+                        Studio kreatif &amp; digital di Medan. Kami membantu brand bertumbuh lewat strategi konten, website berkinerja tinggi, fotografi produk, hingga perancangan identitas visual yang berkarakter.
                     </p>
                     <div className="flow mt">
                         <Link className="btn" to="/services">

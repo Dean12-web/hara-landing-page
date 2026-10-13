@@ -381,7 +381,9 @@ export const initialDraft = {
   consent:false,
 };
 
-const budgetOptions = [
+export const HARA_WA_NUMBER = "6281375357240";
+
+export const budgetOptions = [
   "Di bawah Rp.1.500.000",
   "Rp1.500.000 - Rp3.000.000",
   "Rp3.000.000 - RP5.000.000",
@@ -389,7 +391,7 @@ const budgetOptions = [
   "Perlu rekomendasi",
 ];
 
-const timelineOptions = [
+export const timelineOptions = [
   "Secepatnya",
   "Dalam 2-4 minggu",
   "1-2 bulan lagi",

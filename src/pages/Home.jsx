@@ -3,11 +3,19 @@ import Hero from '../components/Hero';
 import Ticker from '../components/Ticker';
 import Process from '../components/Process';
 import CtaBanner from '../components/CtaBanner';
+import SEO from '../components/SEO';
 import { servicesData, pricingPlans, portfolioData } from "../data/haraData";
+import { PAGE_SEO, getOrganizationSchema } from "../data/seoData";
 
 export default function Home(){
     return (
         <>
+            <SEO
+                title={PAGE_SEO.home.title}
+                description={PAGE_SEO.home.description}
+                canonical={PAGE_SEO.home.canonical}
+                schema={getOrganizationSchema()}
+            />
             <Hero/>
             <Ticker/>
             {/* Section 01 */}

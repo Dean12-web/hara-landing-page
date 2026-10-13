@@ -1,38 +1,17 @@
-// src/pages/Brief.jsx
 import { useState, useEffect, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { servicesData, pricingPlans } from "../data/haraData";
+import { servicesData, pricingPlans, HARA_WA_NUMBER, budgetOptions, timelineOptions, initialDraft } from "../data/haraData";
+import SEO from "../components/SEO";
+import { PAGE_SEO, getBreadcrumbSchema } from "../data/seoData";
 
-// Nilai awal draft
-const initialDraft = {
-  service: "social-media-management",
-  plan: "starter",
-  budget: "",
-  timeline: "",
-  name: "",
-  company: "",
-  email: "",
-  phone: "",
-  description: "",
-  reference: "",
-  consent: false,
-};
 
-// Opsi kisaran anggaran & timeline
-const budgetOptions = [
-  "Di bawah Rp1.500.000",
-  "Rp1.500.000–Rp3.000.000",
-  "Rp3.000.000–Rp5.000.000",
-  "Di atas Rp5.000.000",
-  "Perlu rekomendasi",
-];
 
-const timelineOptions = [
-  "Secepatnya",
-  "Dalam 2–4 minggu",
-  "1–2 bulan lagi",
-  "Masih eksplorasi",
-];
+
+function generateBriefId() {
+  const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+  const randomHex = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `HARA-${dateStr}-${randomHex}`;
+}
 
 export default function Brief() {
   const [searchParams] = useSearchParams();
@@ -54,6 +33,7 @@ export default function Brief() {
   });
 
   // Baca query parameter dari URL (contoh: ?service=...&plan=... atau ?new=1)
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (searchParams.get("new") === "1") {
       setDraft(initialDraft);
@@ -72,6 +52,7 @@ export default function Brief() {
       }));
     }
   }, [searchParams]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Simpan draft ke sessionStorage setiap kali ada perubahan
   useEffect(() => {
@@ -156,14 +137,12 @@ export default function Brief() {
   const handleSubmitBrief = (e) => {
     e.preventDefault();
     if (!draft.consent) {
-      setErrorMsg("Harap setujui pernyataan penyimpanan data lokal.");
+      setErrorMsg("Harap setujui pernyataan penyimpanan data dan penerusan via WhatsApp.");
       return;
     }
 
     // Generate ID unik brief
-    const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-    const randomHex = Math.random().toString(36).substring(2, 6).toUpperCase();
-    const briefId = `HARA-${dateStr}-${randomHex}`;
+    const briefId = generateBriefId();
 
     const newRecord = {
       ...draft,
@@ -189,6 +168,39 @@ export default function Brief() {
     setStep(1);
     setDraft(initialDraft);
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Buka WhatsApp langsung dengan draft brief
+    openWhatsApp(newRecord);
+  };
+
+  // Format teks untuk pesan WhatsApp
+  const generateWhatsAppMessage = (b) => {
+    return `Halo tim HARA, saya ingin mengirimkan brief project:
+
+*ID Brief:* ${b.id}
+*Layanan:* ${b.serviceName}
+*Paket:* ${b.planName}
+*Estimasi:* ${b.amount} ${b.unit}
+
+*Nama:* ${b.name}
+*Brand / Usaha:* ${b.company}
+*Email:* ${b.email}
+*WhatsApp:* ${b.phone}
+*Target Mulai:* ${b.timeline}
+*Kisaran Anggaran:* ${b.budget}
+*Referensi:* ${b.reference || "-"}
+
+*Deskripsi Kebutuhan:*
+${b.description}
+
+Mohon informasi untuk langkah diskusi selanjutnya. Terima kasih!`;
+  };
+
+  // Buka WhatsApp di tab baru
+  const openWhatsApp = (b) => {
+    const text = generateWhatsAppMessage(b);
+    const waUrl = `https://wa.me/${HARA_WA_NUMBER}?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
   };
 
   // Format teks untuk unduh file .txt
@@ -230,12 +242,23 @@ Estimasi bukan invoice resmi. Scope dan biaya final akan disepakati melalui pena
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
+  const breadcrumbs = getBreadcrumbSchema([
+    { name: "Beranda", url: "/" },
+    { name: "Brief Project", url: "/brief" },
+  ]);
+
   // ==========================================
   // TAMPILAN JIKA BRIEF BERHASIL DISIMPAN
   // ==========================================
   if (submittedBrief) {
     return (
       <main id="main" tabIndex="-1">
+        <SEO
+          title={`Brief Tersimpan | ${PAGE_SEO.brief.title}`}
+          description={PAGE_SEO.brief.description}
+          canonical={PAGE_SEO.brief.canonical}
+          schema={breadcrumbs}
+        />
         <section className="section">
           <div className="wrap center">
             <div className="success-icon" style={{ fontSize: "50px", color: "var(--lime)", marginBottom: "20px" }}>
@@ -248,12 +271,11 @@ Estimasi bukan invoice resmi. Scope dan biaya final akan disepakati melalui pena
               <span className="lime">tersusun rapi.</span>
             </h1>
             <p className="lead mt">
-              Brief <b>{submittedBrief.id}</b> berhasil disimpan di perangkat ini. Langkah
-              selanjutnya: unduh ringkasannya lalu bagikan ke tim HARA untuk mulai berdiskusi.
+              Brief <b>{submittedBrief.id}</b> berhasil disimpan dan diarahkan ke WhatsApp tim HARA.
             </p>
 
             <div className="notice mt">
-              Belum dikirim otomatis ke server. Tidak ada biaya atau pembayaran pada tahap ini.
+              WhatsApp telah dibuka secara otomatis dengan draf pesan brief Anda. Jika belum terbuka, silakan klik tombol di bawah untuk melanjutkan pengiriman chat.
             </div>
 
             <div className="card mt" style={{ maxWidth: "600px", margin: "30px auto", textAlign: "left" }}>
@@ -275,18 +297,17 @@ Estimasi bukan invoice resmi. Scope dan biaya final akan disepakati melalui pena
                 <button
                   type="button"
                   className="btn"
+                  onClick={() => openWhatsApp(submittedBrief)}
+                >
+                  Kirim ke WhatsApp HARA ↗
+                </button>
+                <button
+                  type="button"
+                  className="btn outline"
                   onClick={() => handleDownload(submittedBrief)}
                 >
                   Unduh ringkasan ↓
                 </button>
-                <a
-                  className="btn outline"
-                  href="https://www.instagram.com/hara.hq/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Hubungi HARA ↗
-                </a>
               </div>
             </div>
 
@@ -313,6 +334,12 @@ Estimasi bukan invoice resmi. Scope dan biaya final akan disepakati melalui pena
   // ==========================================
   return (
     <main id="main" tabIndex="-1">
+      <SEO
+        title={PAGE_SEO.brief.title}
+        description={PAGE_SEO.brief.description}
+        canonical={PAGE_SEO.brief.canonical}
+        schema={breadcrumbs}
+      />
       {/* Page Hero */}
       <section className="page-hero">
         <div className="wrap">
@@ -658,9 +685,8 @@ Estimasi bukan invoice resmi. Scope dan biaya final akan disepakati melalui pena
                 </p>
 
                 <div className="notice mt mb" style={{ margin: "20px 0" }}>
-                  Brief akan disimpan di browser ini dan belum dikirim langsung ke tim HARA.
-                  Setelah menyimpan, Anda dapat mengunduh ringkasannya untuk dikirimkan melalui
-                  kontak resmi. Tidak ada pembayaran di tahap ini.
+                  Brief akan disimpan dan Anda akan langsung diarahkan ke WhatsApp resmi tim HARA
+                  untuk mengirim ringkasan ini. Tidak ada pembayaran di tahap ini.
                 </div>
 
                 <label className="checkbox">
@@ -672,8 +698,8 @@ Estimasi bukan invoice resmi. Scope dan biaya final akan disepakati melalui pena
                     required
                   />
                   <span>
-                    Saya memahami data brief ini disimpan di perangkat saya. Saya dapat mengunduh
-                    ringkasannya kapan saja.
+                    Saya memahami data brief ini disimpan di perangkat saya dan setuju untuk meneruskannya
+                    ke WhatsApp resmi HARA.
                   </span>
                 </label>
 
@@ -695,7 +721,7 @@ Estimasi bukan invoice resmi. Scope dan biaya final akan disepakati melalui pena
                     ← Kembali
                   </button>
                   <button className="btn" type="submit">
-                    Simpan brief di perangkat ↗
+                    Simpan & Kirim ke WhatsApp ↗
                   </button>
                 </div>
               </form>
