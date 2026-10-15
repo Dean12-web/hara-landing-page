@@ -121,29 +121,22 @@ export default function Home(){
                     </div>
                     <div className="grid two">
                         {portfolioData.map((item)=>(
-                            <Link
-                                key={item.id}
-                                className="work"
-                                to={`/portfolio/${item.id}`}
-                            >
-                                <div
-                                    className={`work-art ${item.artClass}`}
-                                    role="img"
-                                    aria-label={`Ilustarsi konsep ${item.title}`}
-                                >
+                            <Link key={item.id} className="work" to={`/portfolio/${item.id}`} >
+                                <div className={`work-art ${item.artClass}`} role="img" aria-label={`Ilustarsi konsep ${item.title}`}>
                                     <div className="mock">
                                         <em>{item.icon}</em>
                                         <b>{item.title.toUpperCase()}</b>
                                         <small>{item.tagline}</small>
                                     </div>
-                                    <div className="work-info">
+                                </div>
+                                 <div className="work-info">
                                        <div>
                                             <span style={{color:"white"}}>{item.subtitle}</span>
                                             <h3>{item.title}</h3>
                                         </div>
                                         <b className="arrow lime">↗</b>
                                     </div>
-                                </div>
+                                    
                             </Link>
                         ))}
                     </div>
